@@ -96,7 +96,13 @@ function jqueryUrl() {
 	var version = parseUrl().jquery || DEFAULT_JQUERY_VERSION;
 	var url;
 
-	if ( version === "git" || version === "3.x-git" ) {
+	if ( version === "3.x-local" ) {
+		url = "http://jquery-3.localhost/dist/jquery";
+	} else if ( version === "4.x-local" ) {
+		url = "http://jquery-4.localhost/dist/jquery";
+	} else if ( version === "local" ) {
+		url = "http://jquery.localhost/dist/jquery";
+	} else if ( version === "git" || version === "3.x-git" ) {
 		url = "https://releases.jquery.com/git/jquery-" + version;
 	} else {
 		url = "../../../external/jquery-" + version + "/jquery";
@@ -109,7 +115,9 @@ function migrateUrl() {
 	var jqueryVersion = parseUrl().jquery || DEFAULT_JQUERY_VERSION;
 	var url;
 
-	if ( jqueryVersion === "git" ) {
+	if ( jqueryVersion === "local" || jqueryVersion === "4.x-local" || jqueryVersion === "3.x-local" ) {
+		url = "http://jquery-migrate.localhost/dist/jquery-migrate";
+	} else if ( jqueryVersion === "git" ) {
 		url = "https://releases.jquery.com/git/jquery-migrate-git";
 	} else if ( jqueryVersion[ 0 ] === "3" ) {
 		url = "../../../external/jquery-migrate-3.x/jquery-migrate";
