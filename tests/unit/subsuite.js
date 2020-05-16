@@ -17,7 +17,7 @@ var versions = [
 		"3.4.0", "3.4.1",
 		"3.5.0", "3.5.1",
 		"3.6.0",
-		"3.x-git", "git", "custom"
+		"3.x-git", "git", "custom", "local"
 	],
 	additionalTests = {
 
