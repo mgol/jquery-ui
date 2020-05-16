@@ -2,6 +2,7 @@
 "use strict";
 
 var versions = [
+		"3.x-local", "4.x-local", "local",
 		"1.12.4",
 		"2.2.4",
 		"3.0.0",
