@@ -16,6 +16,7 @@ QUnit.config.urlConfig.push( {
 
 	// Keep in sync with tests/runner/jquery.js
 	value: [
+		"3.x-local", "4.x-local", "local",
 		"1.12.4",
 		"2.2.4",
 		"3.0.0",
