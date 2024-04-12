@@ -213,11 +213,17 @@ QUnit.test( "Ensure form elements don't reset when opening a dialog", function( 
 	d1.remove();
 } );
 
-QUnit.test( "#8958: dialog can be opened while opening", function( assert ) {
+QUnit[
+
+	// Support: jQuery 1.8 only
+	// The test never fully worked in jQuery 1.8 since the input's blur
+	// handler never fired. It's only been uncovered when `ready()` calls
+	// have been added to all handlers. Instead of trying to work around
+	// the issue, skip the test in this old jQuery version.
+	jQuery.fn.jquery.indexOf( "1.8" ) === 0 ? "skip" : "test"
+]( "#8958: dialog can be opened while opening", function( assert ) {
 	var ready = assert.async( 3 );
 	assert.expect( 1 );
-
-	var jQuery1Dot8 = jQuery.fn.jquery.indexOf( "1.8" ) === 0;
 
 	var element = $( "<div>" ).dialog( {
 		autoOpen: false,
@@ -248,15 +254,6 @@ QUnit.test( "#8958: dialog can be opened while opening", function( assert ) {
 		// handle a call to the open() method during the process of the dialog
 		// being opened.
 		.on( "blur", function() {
-
-			// Support: jQuery 1.8 only
-			// The test never fully worked in jQuery 1.8 since the input's blur
-			// handler never fired. It's only been uncovered when `ready()` calls
-			// have been added to all handlers. Skip this handler in jQuery 1.8.
-			if ( jQuery1Dot8 ) {
-				return;
-			}
-
 			element.dialog( "open" );
 
 			// Detach the handlers to avoid firing them outside of this
@@ -266,13 +263,6 @@ QUnit.test( "#8958: dialog can be opened while opening", function( assert ) {
 			ready();
 		} )
 		.trigger( "focus" );
-
-	// Support: jQuery 1.8 only
-	// Account for the skipped `ready()` call above. To make sure the count
-	// is constant, call it here instead.
-	if ( jQuery1Dot8 ) {
-		ready();
-	}
 } );
 
 QUnit.test( "#5531: dialog width should be at least minWidth on creation", function( assert ) {
