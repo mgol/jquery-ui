@@ -540,7 +540,9 @@ $.widget( "ui.draggable", $.ui.mouse, {
 			o.containment = this.helper[ 0 ].parentNode;
 		}
 
-		c = $( o.containment );
+		c = typeof o.containment === "string" ?
+			$( document ).find( o.containment ) :
+			$( o.containment );
 		ce = c[ 0 ];
 
 		if ( !ce ) {

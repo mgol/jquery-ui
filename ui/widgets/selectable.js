@@ -61,7 +61,7 @@ return $.widget( "ui.selectable", $.ui.mouse, {
 		// Cache selectee children based on filter
 		this.refresh = function() {
 			that.elementPos = $( that.element[ 0 ] ).offset();
-			that.selectees = $( that.options.filter, that.element[ 0 ] );
+			that.selectees = $( that.element[ 0 ] ).find( that.options.filter );
 			that._addClass( that.selectees, "ui-selectee" );
 			that.selectees.each( function() {
 				var $this = $( this ),
@@ -99,7 +99,10 @@ return $.widget( "ui.selectable", $.ui.mouse, {
 
 	_mouseStart: function( event ) {
 		var that = this,
-			options = this.options;
+			options = this.options,
+			appendTo = typeof options.appendTo === "string" ?
+				$( document ).find( options.appendTo ) :
+				$( options.appendTo );
 
 		this.opos = [ event.pageX, event.pageY ];
 		this.elementPos = $( this.element[ 0 ] ).offset();
@@ -108,11 +111,11 @@ return $.widget( "ui.selectable", $.ui.mouse, {
 			return;
 		}
 
-		this.selectees = $( options.filter, this.element[ 0 ] );
+		this.selectees = $( this.element[ 0 ] ).find( options.filter );
 
 		this._trigger( "start", event );
 
-		$( options.appendTo ).append( this.helper );
+		appendTo.append( this.helper );
 
 		// position helper (lasso)
 		this.helper.css( {
