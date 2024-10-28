@@ -369,6 +369,7 @@ $.widget( "ui.resizable", $.ui.mouse, {
 	_mouseStart: function( event ) {
 
 		var curleft, curtop, cursor, calculatedSize,
+			containmentElem,
 			o = this.options,
 			el = this.element;
 
@@ -380,8 +381,11 @@ $.widget( "ui.resizable", $.ui.mouse, {
 		curtop = this._num( this.helper.css( "top" ) );
 
 		if ( o.containment ) {
-			curleft += $( o.containment ).scrollLeft() || 0;
-			curtop += $( o.containment ).scrollTop() || 0;
+			containmentElem = typeof o.containment === "string" ?
+				$( document ).find( o.containment ) :
+				$( o.containment );
+			curleft += containmentElem.scrollLeft() || 0;
+			curtop += containmentElem.scrollTop() || 0;
 		}
 
 		this.offset = this.helper.offset();
@@ -1097,9 +1101,12 @@ $.ui.plugin.add( "resizable", "alsoResize", {
 
 	start: function() {
 		var that = $( this ).resizable( "instance" ),
-			o = that.options;
+			o = that.options,
+			alsoResize = typeof o.alsoResize === "string" ?
+				$( document ).find( o.alsoResize ) :
+				$( o.alsoResize );
 
-		$( o.alsoResize ).each( function() {
+		alsoResize.each( function() {
 			var el = $( this ),
 				elSize = that._calculateAdjustedElementDimensions( el );
 

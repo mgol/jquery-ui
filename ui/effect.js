@@ -825,7 +825,7 @@ $.fn.extend( {
 
 	transfer: function( options, done ) {
 		var element = $( this ),
-			target = $( options.to ),
+			target = $( document ).find( options.to ),
 			targetFixed = target.css( "position" ) === "fixed",
 			body = $( "body" ),
 			fixTop = targetFixed ? body.scrollTop() : 0,

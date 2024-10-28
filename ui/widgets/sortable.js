@@ -198,9 +198,13 @@ return $.widget( "ui.sortable", $.ui.mouse, {
 		this.refreshPositions();
 
 		//Prepare the dragged items parent
-		this.appendTo = $( o.appendTo !== "parent" ?
-				o.appendTo :
-				this.currentItem.parent() );
+		if ( o.appendTo === "parent" ) {
+			this.appendTo = this.currentItem.parent();
+		} else {
+			this.appendTo = typeof o.appendTo === "string" ?
+				$( document ).find( o.appendTo ) :
+				$( o.appendTo );
+		}
 
 		//Create and append the visible helper
 		this.helper = this._createHelper( event );
@@ -1238,7 +1242,10 @@ return $.widget( "ui.sortable", $.ui.mouse, {
 	_setContainment: function() {
 
 		var ce, co, over,
-			o = this.options;
+			o = this.options,
+			containmentElem = typeof o.containment === "string" ?
+				$( document ).find( o.containment ) :
+				$( o.containment );
 		if ( o.containment === "parent" ) {
 			o.containment = this.helper[ 0 ].parentNode;
 		}
@@ -1257,8 +1264,8 @@ return $.widget( "ui.sortable", $.ui.mouse, {
 		}
 
 		if ( !( /^(document|window|parent)$/ ).test( o.containment ) ) {
-			ce = $( o.containment )[ 0 ];
-			co = $( o.containment ).offset();
+			ce = containmentElem[ 0 ];
+			co = containmentElem.offset();
 			over = ( $( ce ).css( "overflow" ) !== "hidden" );
 
 			this.containment = [
