@@ -69,6 +69,7 @@ $.widget( "ui.spinner", {
 		numberFormat: null,
 		page: 10,
 		step: 1,
+		wheel: true,
 
 		change: null,
 		spin: null,
@@ -137,6 +138,9 @@ $.widget( "ui.spinner", {
 			}
 		},
 		wheel: function( event ) {
+			if ( !this.options.wheel ) {
+				return;
+			}
 			var activeElement = this.document[ 0 ].activeElement;
 			var isActive = this.element[ 0 ] === activeElement;
 			var delta = event.deltaY || event.originalEvent && event.originalEvent.deltaY;
