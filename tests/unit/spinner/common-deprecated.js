@@ -22,6 +22,7 @@ common.testWidget( "spinner", {
 		numberFormat: null,
 		page: 10,
 		step: 1,
+		wheel: true,
 
 		// Callbacks
 		change: null,
