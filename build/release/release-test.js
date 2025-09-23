@@ -29,7 +29,7 @@ var Release = {
 		console.error.apply( console, arguments );
 		process.exit( 1 );
 	},
-	newVersion: require( "../package" ).version
+	newVersion: require( "../../package.json" ).version
 };
 
 var script = require( "./release" );
