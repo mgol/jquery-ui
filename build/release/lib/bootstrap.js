@@ -41,7 +41,7 @@ Release.define( {
 		} );
 
 		Release._parseRemote();
-		Release.branch = Release.args.branch || "main";
+		Release.branch = Release.exec( "git symbolic-ref --short HEAD" ).trim();
 		Release.preRelease = Release.args.preRelease || false;
 		if ( Release.args.dryRun || Release.args.isTest ) {
 			Release.isTest = true;
@@ -69,7 +69,7 @@ Release.define( {
 	},
 
 	_parseRemote: function() {
-		var remote = Release.args.remote;
+		var remote = Release.exec( "git config --get remote.origin.url" ).trim();
 
 		if ( !remote ) {
 			console.log( "Missing required remote repo." );
@@ -78,14 +78,7 @@ Release.define( {
 			process.exit( 1 );
 		}
 
-		// If it's not a local path, it must be a GitHub repo
-		if ( !/:\/\//.test( remote ) ) {
-			if ( !fs.existsSync( remote ) ) {
-				Release.isTest = !/^jquery\//.test( remote );
-				remote = "git@github.com:" + remote + ".git";
-			}
-		}
-
+		Release.isTest = !/\bjquery\/[\w-]+.git/.test( remote );
 		Release.remote = remote;
 	},
 

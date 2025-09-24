@@ -5,15 +5,21 @@
 Creating a release is as simple as cloning this repository and telling the script which project to use. In order to ensure a clean and proper release is created, you should always start from a new clone of this repository.
 
 ```sh
-git clone git@github.com:jquery/jquery-release.git
-cd jquery-release
+git clone git@github.com:jquery/jquery-ui.git jquery-ui-for-release
+cd jquery-ui-for-release
 npm install
-node release.js --remote=jquery/<project-name>
+node build/release/release.js
 ```
 
 ### Testing the Release Script
 
-You can do a test run of the release script by using a different remote repository. **It is recommended to perform tests from a fresh clone of the project being released.** The script is smart enough to detect if you're using an official repository and adjust which actions are taken so that undesired actions, such as publishing to npm, don't occur for test runs.
+You can do a test run of the release script by using a different remote repository, e.g::
+```sh
+git clone git@github.com:MY-USER/jquery-ui.git jquery-ui-for-release-test
+cd jquery-ui-for-release-test
+```
+
+**It is recommended to perform tests from a fresh clone of the project being released.** The script is smart enough to detect if you're using an official repository and adjust which actions are taken so that undesired actions, such as publishing to npm, don't occur for test runs.
 
 You can also explicitly specify `--dry-run` to skip actions that affect external state.
 
@@ -40,7 +46,7 @@ git push -f
 cd -
 
 npm run clean
-env TEST_REMOTE=$cdn node release.js --dry-run --remote=$project
+env TEST_REMOTE=$cdn node release.js --dry-run
 ```
 
 Save as `test-release.sh` in the checkout of this repo, make  it executable with `chmod +x test-release.sh`, then run with `./test-release.sh`.
@@ -101,10 +107,6 @@ Executes the given `command`. You can pass `{ silent: true }` to suppress output
 
 Returns the output.
 
-#### git( command, errorMessage )
-
-Executes the given git `command`. If the command fails, the release will be aborted and `errorMessage` will be displayed.
-
 #### gitLog( format )
 
 Gets a git log using the specified format. If the log fails, the release will be aborted.
@@ -139,24 +141,11 @@ Executes the array of `methods` (minimum one element) step by step. For any give
 
 Once all methods are executed, the `done` callback is executed.
 
-#### dist( callback )
-
-This function is available in case the project requires more distribution than what is provided.
-It is called after building, but before publishing to npm.
-
 ### Other Properties
 
 #### isTest
 
 Whether this is a test release. Test releases don't publish to npm and use the fake-cdn project instead of publishing to the real CDN.
-
-#### project
-
-The name of the project being released.
-
-#### remote
-
-The location of the remote repository.
 
 #### preRelease
 
@@ -193,7 +182,3 @@ Set to `true` to publish a release via npm. Defaults to `false`.
 #### tagTime
 
 Timestamp for the release tag.
-
-#### branch
-
-Which branch the release is being generated from (defaults to `main`).
