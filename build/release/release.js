@@ -36,7 +36,6 @@ commonTasks = [
 
 	Release._section( "setting up repo" ),
 	Release._createReleaseDirectory,
-	Release._cloneRepo,
 	Release._loadReleaseScript,
 	Release._checkRepoState,
 	Release._checkNpmCredentials,
@@ -70,15 +69,6 @@ commonTasks = [
 	Release._section( "pushing tag" ),
 	Release.confirmReview,
 	Release._pushRelease,
-
-	function( fn ) {
-		if ( Release.dist ) {
-			Release._section( "additional custom distribution" );
-			Release.dist( fn );
-		} else {
-			fn();
-		}
-	},
 
 	function() {
 		if ( Release.npmPublish ) {

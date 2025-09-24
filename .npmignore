@@ -2,6 +2,7 @@
 /build
 /demos
 /dist/cdn
+/dist/__release
 /external
 /tests
 /Gruntfile.js

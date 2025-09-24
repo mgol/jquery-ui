@@ -82,14 +82,6 @@ Release.define( {
 				callback( changelog );
 			} );
 		} );
-	},
-
-	_gatherGithubIssueContributors: function( callback ) {
-
-		// TODO
-		process.nextTick( function() {
-			callback( [] );
-		} );
 	}
 } );
 
