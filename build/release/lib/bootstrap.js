@@ -64,8 +64,8 @@ Release.define( {
 			console.log( "This is a real release. GitHub and npm will be updated." );
 		}
 
-		Release.dir = { base: process.cwd() + "/__release" };
-		Release.dir.repo = Release.dir.base + "/repo";
+		Release.dir.repo = process.cwd();
+		Release.dir = { base: Release.dir.repo + "/dist/__release" };
 	},
 
 	_parseRemote: function() {

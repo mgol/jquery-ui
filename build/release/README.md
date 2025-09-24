@@ -63,8 +63,6 @@ Here's a minimal example:
 module.exports = function( Release ) {
 
 Release.define({
-	issueTracker: "trac",
-	contributorReportId: 37,
 	changelogShell: function() {
 		return "# Amazing Changelog for v" + Release.newVersion + "\n";
 	}
@@ -75,14 +73,6 @@ Release.define({
 
 ### Required/Recommended Configuration
 
-#### checkRepoState( [ callback ] )
-
-Performs any project-specific checks to ensure the repository is in a good state to be released. For example, there is a built-in check to ensure that `AUTHORS.txt` is up-to-date.
-
-This method has no return value. If a project-specific check fails, the script should use `Release.abort()` to prevent the release from continuing.
-
-This method may be synchronous or asynchronous depending on the presence of `callback`. If present, the callback must be invoked.
-
 #### generateArtifacts( callback )
 
 Generates any release artifacts that should be included in the release. The callback must be invoked with an array of files that should be committed before creating the tag.
@@ -91,23 +81,9 @@ Generates any release artifacts that should be included in the release. The call
 
 Defines the shell for the changelog. The changelog is created by concatenating the shell, the commit log, and the issue list.
 
-#### tracMilestone()
-
-If using Trac, return a different milestone to be used in the queries to generate a changelog and list of contributors. Defaults to `newVersion`.
-
 #### npmTags()
 
 A function that returns an array of tags to apply to the npm release. Every release must contain at least one tag.
-
-#### issueTracker
-
-Which type of issue tracker is being used for the project. Must be either `"trac"` or `"github"`.
-
-#### contributorReportId
-
-If using Trac, this defines which report will produce a list of contributors for a specific release.
-
-See [docs/trac-contributors.sql](docs/trac-contributors.sql) for the SQL necessary to create the Trac report.
 
 #### exports.dependencies
 
@@ -154,12 +130,6 @@ Prompts the user to confirm they want to continue with the release script. If th
 #### confirmReview( callback )
 
 Prompts the user to review the output and confirm they want to continue with the release script. If the user decides not to continue, the release will be aborted and `callback` won't be invoked.
-
-#### trac( path )
-
-Gets the results of a Trac query, with tab-delimited results.
-
-Returns the tab-delimited string.
 
 #### readPackage()
 

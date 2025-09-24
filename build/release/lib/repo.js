@@ -8,33 +8,6 @@ module.exports = function( Release ) {
 Release.define( {
 	_jsonFiles: [ "package.json", "package-lock.json", "bower.json" ],
 
-	_cloneRepo: function() {
-		var releaseDependencies, projectRelease;
-
-		Release.chdir( Release.dir.base );
-		console.log( "Cloning " + chalk.cyan( Release.remote ) + "..." );
-		Release.exec( "git clone " + Release.remote + " " + Release.dir.repo,
-			"Error cloning repo." );
-		Release.chdir( Release.dir.repo );
-
-		console.log( "Checking out " + chalk.cyan( Release.branch ) + " branch..." );
-		Release.exec( "git checkout " + Release.branch, "Error checking out branch." );
-		console.log();
-
-		console.log( "Installing dependencies..." );
-		Release.exec( "npm install --no-save", "Error installing dependencies." );
-		console.log();
-
-		projectRelease = require( Release.dir.repo + "/build/release" );
-		if ( projectRelease.dependencies ) {
-			console.log( "Installing release dependencies..." );
-			releaseDependencies = projectRelease.dependencies.join( " " );
-			Release.exec( "npm install --no-save " + releaseDependencies,
-				"Error installing release dependencies." );
-			console.log();
-		}
-	},
-
 	_loadReleaseScript: function() {
 		console.log( "Loading project-specific release script..." );
 		var projectRelease = require( Release.dir.repo + "/build/release/release-config" );
@@ -42,25 +15,8 @@ Release.define( {
 		console.log();
 	},
 
-	_checkRepoState: function( fn ) {
-		if ( !Release.issueTracker ) {
-			Release.abort( "Missing required config: issueTracker." );
-		}
-
-		Release.issueTracker = Release.issueTracker.toLowerCase();
-		if ( [ "github", "trac" ].indexOf( Release.issueTracker ) === -1 ) {
-			Release.abort( "Invalid value for issueTracker. Must be 'github' or 'trac'." );
-		}
-
-		if ( Release.issueTracker === "trac" ) {
-			if ( !Release.contributorReportId ) {
-				Release.abort( "Missing required config: contributorReportId." );
-			}
-		}
-
+	_checkRepoState: function() {
 		Release._checkAuthorsTxt();
-
-		Release.walk( [ Release.checkRepoState ], fn );
 	},
 
 	_checkAuthorsTxt: function() {
@@ -87,8 +43,6 @@ Release.define( {
 		console.log( "Last listed author (" + chalk.cyan( lastListedAuthor ) + ") is correct." );
 	},
 
-	checkRepoState: function() {},
-
 	// Unwrapped URL field from package.json, no trailing slash
 	_packageUrl: function( field ) {
 		var result = Release.readPackage()[ field ];
@@ -108,13 +62,7 @@ Release.define( {
 	},
 
 	_ticketUrl: function() {
-		return Release._packageUrl( "bugs" ) + ( Release.issueTracker === "trac" ?
-
-			// Trac bugs URL is just the host
-			"/ticket/" :
-
-			// GitHub bugs URL is host/user/repo/issues
-			"/" );
+		return Release._packageUrl( "bugs" ) + "/";
 	},
 
 	_repositoryUrl: function() {
