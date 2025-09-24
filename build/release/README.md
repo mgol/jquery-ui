@@ -85,12 +85,6 @@ Defines the shell for the changelog. The changelog is created by concatenating t
 
 A function that returns an array of tags to apply to the npm release. Every release must contain at least one tag.
 
-#### exports.dependencies
-
-*Note: This is a property on the `exports` object in `build/release.js`.*
-
-An array of release-specific dependencies. Dependencies can be listed here instead of in `devDependencies` in `package.json` so that contributors don't need to install dependencies which are only necessary for the release.
-
 ### Other Methods
 
 #### define( props )
