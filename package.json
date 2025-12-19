@@ -56,9 +56,13 @@
 	},
 	"devDependencies": {
 		"@swc/core": "1.15.2",
+		"chalk": "4.1.2",
+		"changelogplease": "1.2.0",
 		"commitplease": "3.2.0",
 		"download.jqueryui.com": "2.4.4",
+		"enquirer": "2.4.1",
 		"eslint-config-jquery": "3.0.2",
+		"github-request": "1.2.4",
 		"globals": "16.5.0",
 		"grunt": "1.6.1",
 		"grunt-bowercopy": "1.2.5",
@@ -73,7 +77,9 @@
 		"load-grunt-tasks": "5.1.0",
 		"node-packager": "0.0.7",
 		"rimraf": "6.1.0",
-		"shelljs": "0.10.0"
+		"semver": "7.7.2",
+		"shelljs": "0.10.0",
+		"which": "5.0.0"
 	},
 	"keywords": []
 }
