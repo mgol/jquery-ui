@@ -6,7 +6,7 @@ var fs = require( "fs" ),
 module.exports = function( Release ) {
 
 Release.define( {
-	_jsonFiles: [ "package.json", "package-lock.json", "bower.json" ],
+	_jsonFiles: [ "package.json", "package-lock.json" ],
 
 	_loadReleaseScript: function() {
 		console.log( "Loading project-specific release script..." );
@@ -90,23 +90,8 @@ Release.define( {
 		Release._writeJSON( "package.json", json );
 	},
 
-	_versionJSON: function( fileName, version ) {
-		if ( !fs.existsSync( Release.dir.repo + "/" + fileName ) ) {
-			return;
-		}
-		console.log( "Updating " + fileName + "..." );
-		var json = Release._readJSON( fileName );
-		json.version = version;
-		if ( json?.packages[ "" ]?.version ) {
-			json.packages[ "" ].version = version;
-		}
-		Release._writeJSON( fileName, json );
-	},
-
 	_setVersion: function( version ) {
-		Release._jsonFiles.forEach( function( file ) {
-			Release._versionJSON( file, version );
-		} );
+		Release.exec( "npm version " + version + " --no-git-tag-version" );
 	},
 
 	_getVersions: function() {
@@ -223,8 +208,7 @@ Release.define( {
 			"Error checking out " + Release.branch + " branch." );
 
 		// Update only canonical version
-		Release._versionJSON( "package.json", Release.nextVersion );
-		Release._versionJSON( "package-lock.json", Release.nextVersion );
+		Release._setVersion( Release.nextVersion );
 
 		console.log( "Committing version update..." );
 		Release.exec( "git commit -am \"Build: Updating the " + Release.branch +
