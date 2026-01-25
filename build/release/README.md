@@ -55,7 +55,7 @@ Save as `test-release.sh` in the checkout of this repo, make  it executable with
 
 ### Full Usage Options
 
-See the [usage documentation](/docs/usage.txt) for the full set of options. You can also run the script with no parameters to see the usage.
+See the [usage documentation](/build/release/usage.txt) for the full set of options. You can also run the script with no parameters to see the usage.
 
 
 

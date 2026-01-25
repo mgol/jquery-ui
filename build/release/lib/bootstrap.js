@@ -11,7 +11,7 @@ Release.define( {
 	isTest: true,
 
 	_showUsage: function() {
-		console.log( fs.readFileSync( path.resolve( __dirname, "../docs/usage.txt" ), "utf8" ) );
+		console.log( fs.readFileSync( path.resolve( __dirname, "../usage.txt" ), "utf8" ) );
 	},
 
 	_checkExecutables: function() {
