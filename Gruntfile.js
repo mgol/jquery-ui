@@ -392,7 +392,70 @@ grunt.initConfig({
 				"jquery-3.0.0/LICENSE.txt": "jquery-3.0.0/LICENSE.txt",
 
 				"jquery-3.1.0/jquery.js": "jquery-3.1.0/dist/jquery.js",
-				"jquery-3.1.0/LICENSE.txt": "jquery-3.1.0/LICENSE.txt"
+				"jquery-3.1.0/LICENSE.txt": "jquery-3.1.0/LICENSE.txt",
+
+				"jquery-3.1.1/jquery.js": "jquery-3.1.1/dist/jquery.js",
+				"jquery-3.1.1/LICENSE.txt": "jquery-3.1.1/LICENSE.txt",
+
+				"jquery-3.2.0/jquery.js": "jquery-3.2.0/dist/jquery.js",
+				"jquery-3.2.0/LICENSE.txt": "jquery-3.2.0/LICENSE.txt",
+
+				"jquery-3.2.1/jquery.js": "jquery-3.2.1/dist/jquery.js",
+				"jquery-3.2.1/LICENSE.txt": "jquery-3.2.1/LICENSE.txt",
+
+				"jquery-3.3.0/jquery.js": "jquery-3.3.0/dist/jquery.js",
+				"jquery-3.3.0/LICENSE.txt": "jquery-3.3.0/LICENSE.txt",
+
+				"jquery-3.3.1/jquery.js": "jquery-3.3.1/dist/jquery.js",
+				"jquery-3.3.1/LICENSE.txt": "jquery-3.3.1/LICENSE.txt",
+
+				"jquery-3.4.0/jquery.js": "jquery-3.4.0/dist/jquery.js",
+				"jquery-3.4.0/LICENSE.txt": "jquery-3.4.0/LICENSE.txt",
+
+				"jquery-3.4.1/jquery.js": "jquery-3.4.1/dist/jquery.js",
+				"jquery-3.4.1/LICENSE.txt": "jquery-3.4.1/LICENSE.txt",
+
+				"jquery-3.5.0/jquery.js": "jquery-3.5.0/dist/jquery.js",
+				"jquery-3.5.0/LICENSE.txt": "jquery-3.5.0/LICENSE.txt",
+
+				"jquery-3.5.1/jquery.js": "jquery-3.5.1/dist/jquery.js",
+				"jquery-3.5.1/LICENSE.txt": "jquery-3.5.1/LICENSE.txt",
+
+				"jquery-3.6.0/jquery.js": "jquery-3.6.0/dist/jquery.js",
+				"jquery-3.6.0/LICENSE.txt": "jquery-3.6.0/LICENSE.txt",
+
+				"jquery-3.6.1/jquery.js": "jquery-3.6.1/dist/jquery.js",
+				"jquery-3.6.1/LICENSE.txt": "jquery-3.6.1/LICENSE.txt",
+
+				"jquery-3.6.2/jquery.js": "jquery-3.6.2/dist/jquery.js",
+				"jquery-3.6.2/LICENSE.txt": "jquery-3.6.2/LICENSE.txt",
+
+				"jquery-3.6.3/jquery.js": "jquery-3.6.3/dist/jquery.js",
+				"jquery-3.6.3/LICENSE.txt": "jquery-3.6.3/LICENSE.txt",
+
+				"jquery-3.6.4/jquery.js": "jquery-3.6.4/dist/jquery.js",
+				"jquery-3.6.4/LICENSE.txt": "jquery-3.6.4/LICENSE.txt",
+
+				"jquery-3.7.0/jquery.js": "jquery-3.7.0/dist/jquery.js",
+				"jquery-3.7.0/LICENSE.txt": "jquery-3.7.0/LICENSE.txt",
+
+				"jquery-3.7.1/jquery.js": "jquery-3.7.1/dist/jquery.js",
+				"jquery-3.7.1/LICENSE.txt": "jquery-3.7.1/LICENSE.txt",
+
+				"jquery-4.0.0/jquery.js": "jquery-4.0.0/dist/jquery.js",
+				"jquery-4.0.0/LICENSE.txt": "jquery-4.0.0/LICENSE.txt",
+
+				"jquery-migrate-1.x/jquery-migrate.js":
+					"jquery-migrate-1.x/dist/jquery-migrate.js",
+				"jquery-migrate-1.x/LICENSE.txt": "jquery-migrate-1.x/LICENSE.txt",
+
+				"jquery-migrate-3.x/jquery-migrate.js":
+					"jquery-migrate-3.x/dist/jquery-migrate.js",
+				"jquery-migrate-3.x/LICENSE.txt": "jquery-migrate-3.x/LICENSE.txt",
+
+				"jquery-migrate-4.x/jquery-migrate.js":
+					"jquery-migrate-4.x/dist/jquery-migrate.js",
+				"jquery-migrate-4.x/LICENSE.txt": "jquery-migrate-4.x/LICENSE.txt"
 			}
 		}
 	},

@@ -5,6 +5,7 @@ requirejs.config( {
 		"globalize": "../../../external/globalize/globalize",
 		"globalize/ja-JP": "../../../external/globalize/globalize.culture.ja-JP",
 		"jquery": jqueryUrl(),
+		"jquery-migrate": migrateUrl(),
 		"jquery-simulate": "../../../external/jquery-simulate/jquery.simulate",
 		"jshint": "../../../external/jshint/jshint",
 		"lib": "../../lib",
@@ -57,16 +58,18 @@ function requireModules( dependencies, callback, modules ) {
 
 // Load a set of test file along with the required test infrastructure
 function requireTests( dependencies, noBackCompat ) {
-	dependencies = [
+	var preDependencies = [
 		"lib/qunit",
 		noBackCompat ? "jquery-no-back-compat" : "jquery",
 		"jquery-simulate"
-	].concat( dependencies );
+	];
 
-	// Load the TestSwarm injector, if necessary
-	if ( parseUrl().swarmURL ) {
-		dependencies.push( "testswarm" );
+	// Load migrate before test files
+	if ( parseUrl().migrate ) {
+		preDependencies.push( "jquery-migrate" );
 	}
+
+	dependencies = preDependencies.concat( dependencies );
 
 	requireModules( dependencies, function( QUnit ) {
 		QUnit.start();
@@ -82,8 +85,12 @@ function parseUrl() {
 	var current;
 
 	for ( ; i < length; i++ ) {
-		current = parts[ i ].split( "=" );
-		data[ current[ 0 ] ] = current[ 1 ];
+		if ( parts[ i ].match( "=" ) ) {
+			current = parts[ i ].split( "=" );
+			data[ current[ 0 ] ] = current[ 1 ];
+		} else {
+			data[ parts[ i ] ] = true;
+		}
 	}
 
 	return data;
@@ -97,6 +104,29 @@ function jqueryUrl() {
 		url = "http://code.jquery.com/jquery-" + version;
 	} else {
 		url = "../../../external/jquery-" + ( version || "1.12.4" ) + "/jquery";
+	}
+
+	return url;
+}
+
+function migrateUrl() {
+	var jqueryVersion = parseUrl().jquery || "1.12.4";
+	var url;
+
+	if ( jqueryVersion === "git" ) {
+		url = "https://releases.jquery.com/git/jquery-migrate-git";
+	} else if ( jqueryVersion[ 0 ] === "4" ) {
+		url = "../../../external/jquery-migrate-4.x/jquery-migrate";
+	} else if ( jqueryVersion[ 0 ] === "3" ) {
+		url = "../../../external/jquery-migrate-3.x/jquery-migrate";
+	} else if ( jqueryVersion[ 0 ] === "1" || jqueryVersion[ 0 ] === "2" ) {
+		url = "../../../external/jquery-migrate-1.x/jquery-migrate";
+	} else if ( jqueryVersion === "custom" ) {
+		if ( parseUrl().migrate ) {
+			throw new Error( "Migrate not currently supported for custom build" );
+		}
+	} else {
+		throw new Error( "No migrate version known for jQuery " + jqueryVersion );
 	}
 
 	return url;
