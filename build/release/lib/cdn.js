@@ -9,29 +9,9 @@ module.exports = function( Release ) {
 		testRemote = process.env.TEST_REMOTE || "git@github.com:jquery/fake-cdn.git";
 
 	function projectCdn() {
-		var project = Release.readPackage().name,
-			jqueryCdn = Release._cloneCdnRepo() + "/cdn";
+		var jqueryCdn = Release._cloneCdnRepo() + "/cdn";
 
-		// Projects with versioned file names
-		if ( project === "jquery" || project === "jquery-compat" ) {
-			return jqueryCdn;
-		}
-		if ( project === "qunitjs" ) {
-			return jqueryCdn + "/qunit";
-		}
-		if ( project === "jquery-color" ) {
-			return jqueryCdn + "/color";
-		}
-
-		// Projects with different directory names than their npm package
-		if ( /^jquery-/.test( project ) ) {
-			project = project.substring( 7 );
-		}
-		if ( project === "pepjs" ) {
-			project = "pep";
-		}
-
-		return jqueryCdn + "/" + project + "/" + Release.newVersion;
+		return jqueryCdn + "/ui/" + Release.newVersion;
 	}
 
 	Release.define( {
