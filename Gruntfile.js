@@ -222,10 +222,9 @@ grunt.initConfig( {
 		}
 	},
 
-	bowercopy: {
+	npmcopy: {
 		inlineVendors: {
 			options: {
-				clean: true,
 				destPrefix: "ui/vendor"
 			},
 			files: {
@@ -236,8 +235,6 @@ grunt.initConfig( {
 
 		all: {
 			options: {
-				clean: true,
-				ignore: [ "jquery" ],
 				destPrefix: "external"
 			},
 			files: {
@@ -410,7 +407,7 @@ grunt.registerTask( "lint", [
 	"csslint",
 	"htmllint"
 ] );
-grunt.registerTask( "build", [ "requirejs", "concat", "minify:main" ] );
+grunt.registerTask( "build", [ "npmcopy", "requirejs", "concat", "minify:main" ] );
 grunt.registerTask( "default", [ "build", "lint" ] );
 grunt.registerTask( "sizer", [ "requirejs:js", "minify:main", "compare_size:all" ] );
 grunt.registerTask( "sizer_all", [ "requirejs:js", "minify", "compare_size" ] );
